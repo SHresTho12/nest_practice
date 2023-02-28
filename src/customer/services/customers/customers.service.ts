@@ -8,14 +8,26 @@ export class CustomersService {
       id: 1,
       name: 'John Akib',
       age: 30,
-      address: '123 Main St',
+      address: {
+        id: 1,
+        street: '123 Main St',
+        city: 'New York',
+        state: 'NY',
+        zip: '10001',
+      },
     },
 
     {
       id: 2,
       name: 'John Akib',
       age: 30,
-      address: '123 Main St',
+      address: {
+        id: 1,
+        street: '123 Main St',
+        city: 'New York',
+        state: 'NY',
+        zip: '10001',
+      },
     },
   ];
   findCustomer = (id: number): object => {
