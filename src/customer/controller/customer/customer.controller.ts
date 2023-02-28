@@ -1,15 +1,21 @@
 import {
   Controller,
   Get,
+  Post,
   HttpException,
   HttpStatus,
   Param,
   ParseIntPipe,
   Req,
   Res,
+  Body,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+
 import { CustomersService } from '../../services/customers/customers.service';
+import { CreateCustomerDto } from '../../dtos/CreateCustomer.dto';
 @Controller('customer')
 export class CustomerController {
   constructor(private customerService: CustomersService) {}
@@ -33,5 +39,17 @@ export class CustomerController {
       return customer;
     }
     return new HttpException('Customer not found', HttpStatus.NOT_FOUND);
+  }
+  @Get('')
+  getAllCustomers() {
+    return this.customerService.getAllCustomers();
+  }
+
+  @Post('create')
+  @UsePipes(ValidationPipe)
+  createCustomer(@Body() createCustomerDto: CreateCustomerDto) {
+    console.log(createCustomerDto);
+
+    this.customerService.createCustomer(createCustomerDto);
   }
 }
